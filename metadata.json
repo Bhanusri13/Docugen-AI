@@ -1,0 +1,5 @@
+{
+  "name": "DocuGen - AI Micro-Documentary Generator",
+  "description": "An end-to-end multi-modal AI platform that automatically generates micro-documentary videos from text prompts.",
+  "requestFramePermissions": []
+}

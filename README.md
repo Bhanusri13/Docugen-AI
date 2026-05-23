@@ -1,42 +1,20 @@
-DocuGen AI – AI-Powered Document-to-Video Generation Platform
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-DocuGen AI is an intelligent AI-powered platform that transforms documents, text content, PDFs, and scripts into engaging videos automatically. The system uses Artificial Intelligence, Natural Language Processing (NLP), and Generative AI to convert textual content into professional visual storytelling with voiceovers, animations, subtitles, and smart scene generation.
+# Run and deploy your AI Studio app
 
-The project is designed to simplify video creation for education, business, content creation, and presentations by reducing manual editing effort.
+This contains everything you need to run your app locally.
 
-🚀 Features
-AI-based document-to-video generation
-Automatic script analysis and scene creation
-AI voice narration and text-to-speech
-Subtitle and caption generation
-Smart image/video suggestions
-Custom video templates and themes
-PDF, DOCX, and text input support
-Multi-language support
-Real-time preview and export
-Responsive and user-friendly interface
-🛠️ Technologies Used
-Frontend: React.js / HTML / CSS / JavaScript
-Backend: Node.js / Python / Flask
-AI & NLP: OpenAI API, Transformers, NLP Models
-Video Processing: FFmpeg, MoviePy
-Database: MongoDB / Firebase
-Cloud & Storage: AWS / Cloudinary
-📌 Applications
-Educational video generation
-AI presentation creator
-Social media content creation
-Business and marketing videos
-Automated explainer videos
-News and article visualization
-🎯 Objective
+View your app in AI Studio: https://ai.studio/apps/e565d625-30da-48b4-9795-dc3215847889
 
-The objective of DocuGen AI is to automate the process of converting documents and textual content into visually appealing videos using AI-driven content understanding and media generation techniques.
+## Run Locally
 
-🔮 Future Enhancements
-AI avatar presenter
-Emotion-based voice generation
-Real-time collaborative editing
-Automatic background music generation
-Advanced animation support
-AI-generated cinematic transitions
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

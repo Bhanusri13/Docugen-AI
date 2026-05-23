@@ -1,0 +1,55 @@
+{
+  "entities": {
+    "Documentary": {
+      "title": "Documentary",
+      "description": "A generated micro-documentary",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the documentary"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "The user's original prompt"
+        },
+        "script": {
+          "type": "string",
+          "description": "The full narration script"
+        },
+        "scenes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "visualPrompt": { "type": "string" }
+            }
+          }
+        },
+        "sceneImages": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Base64 encoded images for each scene"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who created it"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When it was created"
+        }
+      },
+      "required": ["title", "prompt", "script", "scenes", "userId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/documentaries/{docId}": {
+      "schema": "Documentary",
+      "description": "Collection of generated documentaries"
+    }
+  }
+}

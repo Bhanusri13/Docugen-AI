@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: documentaries
+    // Document ID: auto-generated
+    // Fields:
+    //   - title: string (required, 1-200 chars)
+    //   - prompt: string (required, 1-1000 chars)
+    //   - script: string (required, 1-5000 chars)
+    //   - scenes: list (required, max 10 items)
+    //   - sceneImages: list (optional, max 10 items)
+    //   - userId: string (required, matches auth.uid)
+    //   - createdAt: timestamp (required)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidDocumentary(data) {
+      return data.keys().hasAll(['title', 'prompt', 'script', 'scenes', 'userId', 'createdAt']) &&
+             data.title is string && data.title.size() > 0 && data.title.size() <= 200 &&
+             data.prompt is string && data.prompt.size() > 0 && data.prompt.size() <= 1000 &&
+             data.script is string && data.script.size() > 0 && data.script.size() <= 5000 &&
+             data.scenes is list && data.scenes.size() <= 10 &&
+             (!('sceneImages' in data) || (data.sceneImages is list && data.sceneImages.size() <= 10)) &&
+             data.userId == request.auth.uid &&
+             data.createdAt is timestamp;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /documentaries/{docId} {
+      allow read: if isOwner(resource.data.userId);
+      allow create: if isAuthenticated() && isValidDocumentary(request.resource.data);
+      allow update: if isOwner(resource.data.userId) && isValidDocumentary(request.resource.data) && 
+                      request.resource.data.userId == resource.data.userId &&
+                      request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if isOwner(resource.data.userId);
+    }
+
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+  }
+}
